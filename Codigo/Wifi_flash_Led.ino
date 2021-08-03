@@ -1,3 +1,42 @@
+/*
+ * Conexión simple a WiFi
+ * Modificado por: Angel Ibañez 
+ * Fecha: 29 de junio de 2021
+ * 
+ * Este programa muestra una conexión básica a WiFi para 
+ * ESP32CAM. Para ello es necesario que cambies el SSID y 
+ * contraseña por los datos correspondientes a la red que 
+ * deseas conectarte. Puedes observar el estado de la conexión 
+ * con el monitor serial. No se requieren componentes adicionales.
+ * 
+ * En este programa se usan los leds soldados sobre la placa
+ * ESP32CAM, el led flash y el led de status.
+ * 
+ * Componente     PinESP32CAM     Estados lógicos
+ * ledStatus------GPIO 33---------On=>LOW, Off=>HIGH
+ * ledFlash-------GPIO 4----------On=>HIGH, Off=>LOW
+ * LedPin---------GPIO 12---------On=>HIGH, Off=>LOW
+ */
+
+// Bibliotecas
+#include <WiFi.h>  // Biblioteca para manejar el WiFi del ESP32CAM
+
+// Datos de Red
+const char* ssid = "Yeahs";  // Pon aquí el nombre de la red a la que deseas conectarte
+const char* password = "Ma72An99Da02";  // Escribe la contraseña de dicha red
+
+// Objetos
+WiFiClient espClient; // Este objeto maneja las variables necesarias para una conexion WiFi
+
+// Variables del programa
+int statusLedPin = 33;  // Esta variable controla el led de status
+int flashLedPin = 4; // Esta variable controla el led flash
+double timeLast, timeNow; // Variables para el control de tiempo no bloqueante
+double wait = 500;  // Espera de 500 mili segundos para consultar conexión
+bool statusLed = 0;// Bandera que me dice si el led esta encendido o apagado
+int LedPin = 12; //Esta variable contrala el led incluido 
+
+
 // Inicialización del programa
 void setup() {
   //Configuración de pines
