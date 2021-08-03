@@ -1,7 +1,7 @@
 # ESP32CAM
 Ejercios relizados con el ESP32.
 
-Fecha: 
+Fecha:26/07/21 
 Ejercicios con la webcam.
 Configurar el IDE del arduino y probar la camara. 
 
