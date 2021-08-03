@@ -111,6 +111,7 @@ void callback(char* topic, byte* message, unsigned int length) {
   // Indicar por serial que llegó un mensaje
   Serial.print("Llegó un mensaje en el tema: ");
   Serial.print(topic);
+  Serial.print(": "); // agregado para una mejor estética
 
   // Concatenar los mensajes recibidos para conformarlos como una varialbe String
   String messageTemp; // Se declara la variable en la cual se generará el mensaje completo  
@@ -127,8 +128,8 @@ void callback(char* topic, byte* message, unsigned int length) {
   // En esta parte puedes agregar las funciones que requieras para actuar segun lo necesites al recibir un mensaje MQTT
 
   // Ejemplo, en caso de recibir el mensaje true - false, se cambiará el estado del led soldado en la placa.
-  // El ESP323CAM está suscrito al tema esp/output
-  if (String(topic) == "esp32/output") {  // En caso de recibirse mensaje en el tema esp32/output
+  // El ESP323CAM está suscrito al tema esp/data/grupo2
+  if (String(topic) == "esp32/data/grupo2") {  // En caso de recibirse mensaje en el tema esp32/output
     if(messageTemp == "true"){
       Serial.println("Led encendido");
       digitalWrite(flashLedPin, HIGH);
@@ -148,7 +149,7 @@ void reconnect() {
     // Intentar reconexión
     if (client.connect("ESP32CAMClient")) { //Pregunta por el resultado del intento de conexión
       Serial.println("Conectado");
-      client.subscribe("esp32/output"); // Esta función realiza la suscripción al tema
+      client.subscribe("esp32/data/grupo2"); // Esta función realiza la suscripción al tema
     }// fin del  if (client.connect("ESP32CAMClient"))
     else {  //en caso de que la conexión no se logre
       Serial.print("Conexion fallida, Error rc=");
